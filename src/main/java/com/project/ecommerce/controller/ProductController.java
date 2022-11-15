@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("product")
 public class ProductController {
@@ -17,6 +17,7 @@ public class ProductController {
 
     @PostMapping("/create")
     public ResponseEntity<String> createProduct(@RequestBody Product prod){
+        
         return ResponseEntity.ok(productService.create(prod));
     }
 
