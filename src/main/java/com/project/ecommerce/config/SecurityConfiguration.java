@@ -21,16 +21,14 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
+                .cors().and()
                 .csrf().disable()
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests()
                 .mvcMatchers(HttpMethod.GET, "/**").permitAll()
-                .mvcMatchers(HttpMethod.POST, "/**").permitAll()
-                .mvcMatchers(HttpMethod.PUT, "/**").permitAll()
-                .mvcMatchers(HttpMethod.DELETE, "/**").permitAll()
-                // .mvcMatchers(HttpMethod.POST, "/**").hasAnyAuthority("admin")
-                // .mvcMatchers(HttpMethod.PUT, "/**").hasAnyAuthority("admin")
-                // .mvcMatchers(HttpMethod.DELETE, "/**").hasAnyAuthority("admin")
+                .mvcMatchers(HttpMethod.POST, "/**").hasAnyAuthority("admin")
+                .mvcMatchers(HttpMethod.PUT, "/**").hasAnyAuthority("admin")
+                .mvcMatchers(HttpMethod.DELETE, "/**").hasAnyAuthority("admin")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
